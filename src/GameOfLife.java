@@ -107,8 +107,32 @@ public class GameOfLife {
 			}
 		}
 		
+		if (this.isStillLife(world, newWorld)) {
+			System.out.println("Still life detected!");
+			System.exit(0);
+		}
+		
 		world = newWorld;
 		generation++;
+	}
+	
+	/**
+	 * Checks if the current game is a still life
+	 * 
+	 * @param oldWorld the old world
+	 * @param newWorld the new world
+	 * @return true if the current game is a still life
+	 */
+	private boolean isStillLife(boolean[][] oldWorld, boolean[][] newWorld) {
+		for (int i = 0; i < this.size; i++) {
+			for (int j = 0; j < this.size; j++) {
+				if (oldWorld[i][j] != newWorld[i][j]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 
 	/**
