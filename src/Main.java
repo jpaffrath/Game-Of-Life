@@ -7,6 +7,12 @@ public class Main {
 	private static int generations = -1;
 	private static int live = 30;
 	
+	/**
+	 * Tries to parse a given string into an integer 
+	 * 
+	 * @param arg a string containing an integer
+	 * @return the parsed integer
+	 */
 	private static int parseIntegerArgument(String arg) {
 		int ret = 0;
 		
@@ -21,6 +27,11 @@ public class Main {
 		return ret;
 	}
 	
+	/**
+	 * Parses the provided command line arguments
+	 * 
+	 * @param args the command line arguments
+	 */
 	private static void parseArgs(String [] args) {
 		if (args.length <= 0) return;
 		
@@ -49,9 +60,17 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Program entry point
+	 * 
+	 * @param args provided command line arguments
+	 * @throws java.lang.InterruptedException
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws java.lang.InterruptedException, IOException {
 		parseArgs(args);
 		
+		// initialize a new game either with a provided file or random
 		GameOfLife life;
 		if (file.isEmpty()) {
 			life = new GameOfLife(size, live);
@@ -62,6 +81,7 @@ public class Main {
 		
 		life.drawWorld();
 		
+		// if no maximum amount of generations is provided, loop forever
 		if (generations == -1) {
 			while (true) {
 				Thread.sleep(velocity);
@@ -69,6 +89,7 @@ public class Main {
 				life.drawWorld();
 			}
 		}
+		// loop only the provided number of generations and stop
 		else {
 			for (int i = 0; i < generations; i++) {
 				Thread.sleep(velocity);
