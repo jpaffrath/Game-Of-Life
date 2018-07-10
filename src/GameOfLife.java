@@ -114,6 +114,12 @@ public class GameOfLife {
 		
 		world = newWorld;
 		generation++;
+		
+		if (this.isDeadWorld()) {
+			this.drawWorld();
+			System.out.println("All cells are dead :(");
+			System.exit(0);
+		}
 	}
 	
 	/**
