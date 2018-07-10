@@ -24,6 +24,11 @@ public class Main {
 			System.exit(0);
 		}
 		
+		if (ret <= 0) {
+			System.out.println("Negative numbers are not allowed!");
+			System.exit(0);
+		}
+		
 		return ret;
 	}
 	
