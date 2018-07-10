@@ -134,6 +134,23 @@ public class GameOfLife {
 		
 		return true;
 	}
+	
+	/**
+	 * Checks if the current game contains living cells
+	 * 
+	 * @return true if the current world is completely dead
+	 */
+	private boolean isDeadWorld() {
+		for (int i = 0; i < this.size; i++) {
+			for (int j = 0; j < this.size; j++) {
+				if (this.world[i][j]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 
 	/**
 	 * Calculates if a given cell is alive in the next generation
