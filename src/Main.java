@@ -78,6 +78,11 @@ public class Main {
 		// initialize a new game either with a provided file or random
 		GameOfLife life;
 		if (file.isEmpty()) {
+			if (live > 100) {
+				System.out.println("Amount of live " + live + " is out of range! (0-100)");
+				System.exit(0);
+			}
+			
 			life = new GameOfLife(size, live);
 		}
 		else {
