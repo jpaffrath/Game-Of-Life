@@ -20,7 +20,7 @@ public class Main {
 			ret = Integer.parseInt(arg);
 		}
 		catch (NumberFormatException e) {
-			System.out.println("Argument " + arg + " is not a number!");
+			System.out.println("Argument " + arg + " is not a valid number!");
 			System.exit(0);
 		}
 		
