@@ -1,7 +1,8 @@
 import java.io.IOException;
 
 public class Main {
-	private static String file = "";
+	private static String inputFile = "";
+	private static String outputFile = "";
 	private static int velocity = 200;
 	private static int size = 50;
 	private static int generations = -1;
@@ -44,7 +45,7 @@ public class Main {
 			switch (args[i]) {
 			case "--file":
 			case "-f":
-				file = args[++i]; break;
+				inputFile = args[++i]; break;
 			
 			case "--velocity":
 			case "-v":
@@ -61,6 +62,10 @@ public class Main {
 			case "--living":
 			case "-l":
 				live = parseIntegerArgument(args[++i]); break;
+			
+			case "--output":
+			case "-o":
+				outputFile = args[++i]; break;
 			}
 		}
 	}
@@ -77,7 +82,7 @@ public class Main {
 		
 		// initialize a new game either with a provided file or random
 		GameOfLife life;
-		if (file.isEmpty()) {
+		if (inputFile.isEmpty()) {
 			if (live > 100) {
 				System.out.println("Amount of live " + live + " is out of range! (0-100)");
 				System.exit(0);
@@ -86,7 +91,7 @@ public class Main {
 			life = new GameOfLife(size, live);
 		}
 		else {
-			life = new GameOfLife(file);
+			life = new GameOfLife(inputFile);
 		}
 		
 		life.drawWorld();
@@ -105,6 +110,11 @@ public class Main {
 				Thread.sleep(velocity);
 				life.nextGeneration();
 				life.drawWorld();
+			}
+			
+			// if an output file is provided, write current world to the file
+			if (outputFile.isEmpty() == false) {
+				life.writeWorldToFile(outputFile);
 			}
 		}
 	}
