@@ -1,4 +1,7 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -92,6 +95,31 @@ public class GameOfLife {
 			System.out.println();
 		}
 		System.out.println("Generation " + generation);
+	}
+	
+	/**
+	 * Writes the current state of the world into a given file
+	 * 
+	 * @param file the path to the file
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException 
+	 */
+	public void writeWorldToFile(String file) throws FileNotFoundException, UnsupportedEncodingException {
+		PrintWriter writer = new PrintWriter(file, "UTF-8");
+		StringBuffer buffer;
+		
+		// write the world dimension into the file so it can be used as an input file
+		writer.println(this.size);
+		
+		for (int row = 0; row < this.size; row++) {
+			buffer = new StringBuffer();		
+			for (int col = 0; col < this.size; col++) {
+				buffer.append(this.world[row][col] ? CHAR_CELL : CHAR_EMPTY);
+			}
+			writer.println(buffer.toString());
+		}
+		
+		writer.close();
 	}
 
 	/**
